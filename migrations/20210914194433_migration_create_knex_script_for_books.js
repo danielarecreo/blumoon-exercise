@@ -6,10 +6,9 @@ exports.up = function (knex, Promise) {
     table.string('title');
     table.string('description');
     table.date('publishYear');
-    });
-  };
-  
-exports.down = function (knex, Promise) {
-   return knex.schema.dropTable('books');
+  });
 };
-  
+
+exports.down = function (knex, Promise) {
+  return knex.schema.dropTable('books');
+};
