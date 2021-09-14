@@ -1,0 +1,29 @@
+{
+  "name": "blumoon-exercise",
+  "version": "1.0.0",
+  "description": "",
+  "main": "knexfile.js",
+  "dependencies": {
+    "knex": "^0.95.11",
+    "pg": "^8.7.1"
+  },
+  "devDependencies": {
+    "semistandard": "16.0.1",
+    "snazzy": "9",
+    "tap": "^15.0.9"
+  },
+  "scripts": {
+    "lint": "semistandard --verbose | snazzy",
+    "test": "tap"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danielarecreo/blumoon-exercise.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/danielarecreo/blumoon-exercise/issues"
+  },
+  "homepage": "https://github.com/danielarecreo/blumoon-exercise#readme"
+}
