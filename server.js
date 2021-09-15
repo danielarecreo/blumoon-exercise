@@ -28,6 +28,28 @@ fastify.route({
   }
 })
 
+// const fastify = require('fastify')()
+
+fastify.register(require('fastify-postgres'), {
+  connectionString: 'postgres://postgres@localhost/postgres'
+})
+
+fastify.get('/authors', (req, reply) => {
+  fastify.pg.connect(onConnect)
+
+  function onConnect (err, client, release) {
+    if (err) return reply.send(err)
+
+    client.query(
+      'SELECT authorID, firstName, lastName, penName, birthDate FROM authors',
+      function onResult (errs, result) {
+        release()
+        reply.send(err || result)
+      }
+    )
+  }
+})
+
 const start = async () => {
   try {
     await fastify.listen(3000)
