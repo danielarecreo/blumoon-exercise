@@ -1,34 +1,15 @@
-// Require the framework and instantiate it
-const fastify = require('fastify')({ logger: true })
+'use strict'
 
-const authors_list = require('./authors')
-
-//return list of authors
-fastify.get('/authors', (req, reply) => {
-  reply.send(authors_list)
+const server = require('./app')({
+  logger: {
+    level: 'info',
+    prettyPrint: true
+  }
 })
 
-//adds an author on the list
-fastify.post('/add_author', (req, reply) => {
-  reply.send(authors_list)
-})
-
-//updates an author on the list
-fastify.put('/update_author', (req, reply) => {
-  
-})
-
-//removes an author on the list
-fastify.delete('/remove_author', (req, reply) => {
-  
-})
-
-const start = async () => {
-  try {
-    await fastify.listen(3000)
-  } catch (err) {
-    fastify.log.error(err)
+server.listen(3000, (err, address) => {
+  if (err) {
+    console.log(err)
     process.exit(1)
   }
-}
-start()
+})
