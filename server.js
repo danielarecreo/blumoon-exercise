@@ -3,11 +3,23 @@ const fastify = require('fastify')({ logger: true })
 
 const authors_list = require('./authors')
 
+//return list of authors
 fastify.get('/authors', (req, reply) => {
   reply.send(authors_list)
 })
 
-fastify.delete('/authors', (req, reply) => {
+//adds an author on the list
+fastify.post('/add_author', (req, reply) => {
+  reply.send(authors_list)
+})
+
+//updates an author on the list
+fastify.put('/update_author', (req, reply) => {
+  
+})
+
+//removes an author on the list
+fastify.delete('/remove_author', (req, reply) => {
   
 })
 
