@@ -8,4 +8,3 @@ module.exports = async function routes(fastify, opts) {
         return { test: `returns a status code of 200 ${this.utility()}` };
     });    
 };
-
