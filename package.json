@@ -14,8 +14,7 @@
   "devDependencies": {
     "semistandard": "16.0.1",
     "snazzy": "9",
-    "tap": "^15.0.9",
-    "start": "node server.js"
+    "tap": "^15.0.9"
   },
   "scripts": {
     "lint": "semistandard --verbose | snazzy",

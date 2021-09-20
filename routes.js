@@ -1,7 +1,7 @@
 module.exports = async function routes(fastify, opts) {
 
     fastify.decorate("utility", function() {
-        return "Decorators are super neat";
+        return "Decorators";
     });
 
     fastify.get("/", async function (request, reply) {

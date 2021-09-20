@@ -1,16 +1,14 @@
-use strict;
-
 const fastify = require("fastify")({
   logger: true,
 })
 
-const { strict } = require("assert/strict");
 const routes = require("./routes");
 
 fastify.register(routes)
 
-fastify.addHook('onClose', (reply, done) => {
-    reply('close server')
+fastify.addHook('onClose', (instance, done) => {
+  // code
+
   done()
 })
 
@@ -23,5 +21,7 @@ const start = async () => {
     process.exit(1);
   }
 };
+
+// fastify.close()
 
 start();
