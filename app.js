@@ -1,27 +1,37 @@
 'use strict';
 
-const fastify = require('fastify');
+const fastify = require('fastify')
+const fp = require('fastify-plugin')
 
-function build (opts = {}) {
-  const app = fastify(opts);
+function build(fp, opts={}) {
+  const app = fastify(opts)
 
-  app.get('/authors', async function (request, reply) {
-    return ('returns a status code of 200 for /authors');
+  fp.decorate("utility", function() {
+    return "Decorators are super neat";
   });
 
-  app.post('/add_author', async function (request, reply) {
-    return ('returns a status code of 200 for /add_author');
-  });
+  // app.get('/authors', async function (request, reply) {
+  //   return ('returns a status code of 200 for /authors');
+  // });
 
-  app.put('/update_author', async function (request, reply) {
-    return ('returns a status code of 200 for /update_author');
-  });
+  // app.post('/add_author', async function (request, reply) {
+  //   return ('returns a status code of 200 for /add_author');
+  // });
 
-  app.delete('/remove_author', async function (request, reply) {
-    return ('returns a status code of 200 for /remove_author');
-  });
+  // app.put('/update_author', async function (request, reply) {
+  //   return ('returns a status code of 200 for /update_author');
+  // });
 
-  return app;
+  // app.delete('/remove_author', async function (request, reply) {
+  //   return ('returns a status code of 200 for /remove_author');
+  // });
+
+
+    app.get('/', async function (request, reply) {
+        return (`returns a status code of 200 ${this.utility()}` );
+    })
+  
+    return app
 }
-
+  
 module.exports = build;
