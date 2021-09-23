@@ -9,6 +9,15 @@ class AuthorController {
         console.error(err);
     }
   }
+
+  async listAuthor(req, res) {
+    try {
+      const users = await authorService.listAuthor(req.body);
+      res.json({users});
+    } catch (err) {
+        console.error(err);
+    }
+  }
 }
 
 module.exports = new AuthorController();

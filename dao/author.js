@@ -16,6 +16,16 @@ class AuthorDAO {
 
         return id;
     }
-}
+
+    async listAuthor() {
+      await db('authors')
+       .select('first_name, lastName, authorID')
+        .from('authors')
+        res.json({
+            users: result
+          });
+      return result;
+  }
+    }
 
 module.exports = new AuthorDAO();
