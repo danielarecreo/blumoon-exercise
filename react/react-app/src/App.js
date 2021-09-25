@@ -5,7 +5,7 @@ import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
 
 import {Route, BrowserRouter as Router} from "react-router-dom";
 
-import Authors from './pages/authors';
+import AuthorsPage from './pages/authors';
 import Homepage from './pages/homepage';
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
     <Router>
       <div className="App">
         <Route path='/' exact component={Homepage} />
-        <Route path='/authors' exact component={Authors} />
+        <Route path='/authors' exact component={AuthorsPage} />
       </div>
     </Router>
   );
