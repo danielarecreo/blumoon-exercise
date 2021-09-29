@@ -30,17 +30,4 @@ const AuthorsPage = () => {
     )
 }
 
-// async function getAuthors() {
-//     // try {
-//     //   const response = await axios.get('https://mocki.io/v1/4751c4b8-4298-4f31-95a9-01c4ea10af23');
-//     //   console.log(response);
-//     // } catch (error) {
-//     //   console.error(error);
-//     // }
-
-//     const response = await axios.get('https://mocki.io/v1/4751c4b8-4298-4f31-95a9-01c4ea10af23');
-//     console.log(response)
-//   }
-
-
 export default AuthorsPage;
