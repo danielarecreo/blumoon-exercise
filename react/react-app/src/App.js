@@ -7,6 +7,7 @@ import {Route, BrowserRouter as Router} from "react-router-dom";
 
 import AuthorsPage from './pages/authors';
 import Homepage from './pages/homepage';
+import CreateAuthor from './pages/create-author';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <div className="App">
         <Route path='/' exact component={Homepage} />
         <Route path='/authors' exact component={AuthorsPage} />
+        <Route path='/create-author' exact component={CreateAuthor} />
       </div>
     </Router>
   );
