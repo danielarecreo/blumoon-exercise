@@ -2,8 +2,10 @@ const fastify = require('fastify')({
   logger: true
 });
 
+const dbconnector = require('./db/db')
 const routes = require('./routes');
 
+fastify.register(dbconnector)
 fastify.register(routes);
 
 fastify.addHook('onClose', (instance, done) => {
