@@ -11,7 +11,7 @@ const client = new Client({
 async function dbconnector(fastify, options) { 
     try { 
         await client.connect() 
-        console.log("db connected succesfully") 
+        console.log("DB connected successfully") 
         fastify.decorate('db', {client}) 
     } catch(err) { 
         console.error(err) 
