@@ -4,25 +4,64 @@ const axios = require('axios');
 
 const AuthorsPage = () => {
     
-    // return <h1>Welcome to authors page!</h1>;
-    
-   const getAll = () => {
-    axios.get('https://mocki.io/v1/cb4b1204-63b6-4aca-a6a2-47b5d75ee6bb')
-    .then(function (response) {
-        const authorsData = response.data;
-        return authorsData;
-        //console.log(authorsData)
-    })
-    .catch(function (error) {
-        console.log(error);
-    })
-    .then(function () {
-        // always executed
-    });  
-   }
+    const getAuthors = () => {
+        axios.get('http://127.0.0.1:3000/')
+        .then(function (response) {
+            const authorsArray = response.data
+            return authorsArray;
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+        .then(function () {
+            // always executed
+        });
+    }
 
-   useEffect(() => {
-        getAll();
+    const addAuthor = () => {
+        axios.get('http://127.0.0.1:3000/add-author')
+        .then(function (response) {
+            const authorsArray = response.data
+            return authorsArray;
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+        .then(function () {
+            // always executed
+        });  
+    }
+
+    const updateAuthor = () => {
+        axios.get('http://127.0.0.1:3000/update-author')
+        .then(function (response) {
+            const authorsArray = response.data
+            return authorsArray;
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+        .then(function () {
+            // always executed
+        });  
+    }
+
+    const deleteAuthor = () => {
+        axios.get('http://127.0.0.1:3000/delete-author')
+        .then(function (response) {
+            const authorsArray = response.data
+            return authorsArray;
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+        .then(function () {
+            // always executed
+        });  
+    }
+
+    useEffect(() => {
+        getAuthors();
     }, []);
 
     return (         
