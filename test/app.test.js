@@ -3,6 +3,19 @@
 const { test } = require('tap');
 const build = require('../app');
 
+test('requests the "/" route', async t => {
+  const app = build();
+
+  const response = await app.inject({
+    method: 'GET',
+    url: '/'
+  });
+
+  console.log('status code: ', response.statusCode)
+  console.log('body: ', response.body)
+});
+
+//below tests not working
 test('requests the "/authors" route', async t => {
   const app = build();
 
