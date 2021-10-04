@@ -1,7 +1,6 @@
 import { Button } from 'antd';
 
-const Homepage = () =>
-{
+const Homepage = () => {
     return (
         <header className="App-header">
           {/* <img src={logo} className="App-logo" alt="logo" /> */}
@@ -9,7 +8,7 @@ const Homepage = () =>
           
           <small>Click the button below to show all the authors in this exercise.</small>
           <br />
-          <Button type="primary">Show All</Button>
+          <Button href='/authors' type="link">Show All</Button>
         </header>
     )
 }

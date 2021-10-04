@@ -6,7 +6,7 @@ async function routes(fastify, options) {
   const { v4: uuidv4 } = require('uuid');
 
   //returns list of authors
-  fastify.get('/', {schema: allAuthors}, async function (request, reply) { 
+  fastify.get('/authors', {schema: allAuthors}, async function (request, reply) { 
     try { 
         const {rows} = await client.query('SELECT * FROM authors') 
         console.log(rows) 
@@ -19,12 +19,12 @@ async function routes(fastify, options) {
   //adds an author to the list
   fastify.post('/add-author', {schema: addAuthor}, async function(request, reply) {
     const {firstName, lastName, penName, birthDate} = request.body
-    const id = uuidv4()
+    // const id = uuidv4()
 
     const query = {
-        text: `INSERT INTO authors (id, firstName, lastName, penName, birthDate)
-          VALUES($1, $2, $3, $4, $5 ) RETURNING *`,
-        values: [id, firstName, lastName, penName, birthDate], //column firstname of relation authors does not exist
+        text: `INSERT INTO authors ("firstName", "lastName", "penName", "birthDate")
+          VALUES($1, $2, $3, $4 ) RETURNING *`,
+        values: [firstName, lastName, penName, birthDate], //column lastName of relation authors does not exist
     }
            
     try {
@@ -38,35 +38,35 @@ async function routes(fastify, options) {
   })
 
   //updates an author on the list
-  fastify.patch('/update-author/:id',{schema: updateAuthor}, async function (request, reply) {
+  fastify.put('/update-author/:id',{schema: updateAuthor}, async function (request, reply) {
     const id = request.params.id
     const {firstName, lastName, penName, birthDate} = request.body
     const query = {
             text:  `UPDATE authors SET 
-                            firstName = COALESCE($1, firstName), 
-                            lastName = COALESCE($2, "lastName"), 
-                            penName = COALESCE($3, penName),
-                            birthDate = COALESCE($4, birthDate)  
+                            "firstName" = COALESCE($1, "firstName"), 
+                            "lastName" = COALESCE($2, "lastName"), 
+                            "penName" = COALESCE($3, "penName"),
+                            "birthDate" = COALESCE($4, "birthDate")  
                             WHERE id = $5 RETURNING *`,
-            values : [firstName, lastName, penName, birthDate, id] //firstName does not exist
+            values: [firstName, lastName, penName, birthDate, id]
     }
     try {
             const {rows} = await client.query(query)
             console.log(rows[0])
-            reply.code(204)
+            reply.send(rows)
     } catch (err) {
             throw new Error(err)
     }
   })
 
   //removes an author on the list
-  fastify.delete('/delete-author', {schema: deleteAuthor}, async function(request, reply) {
+  fastify.delete('/delete-author/:id', {schema: deleteAuthor}, async function(request, reply) {
     console.log(request.params)
     try {
             const {rows} = await client.query(`DELETE FROM authors
             WHERE id = $1 RETURNING *`, [request.params.id])
             console.log(rows[0])
-            reply.code(204)
+            reply.send(rows)
     } catch(err) {
             throw new Error(err)
     }
@@ -74,4 +74,4 @@ async function routes(fastify, options) {
 
 }
 
-module.exports= routes
+module.exports = routes

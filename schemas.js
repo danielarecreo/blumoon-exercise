@@ -6,7 +6,7 @@ const allAuthors = {
                 type: 'object',
                 required: ['authorID', 'firstName', 'lastName', 'penName', 'birthDate'],
                 properties: {
-                    authorID: {type: 'integer'},                                                              
+                    authorID: {type: 'string'},                                                              
                     firstName: {type: 'string'},                                           
                     lastName:{type: 'string'},                  
                     penName: {type: 'string'},
@@ -22,7 +22,6 @@ const addAuthor = {
         type: 'object',
         required: ["firstName", 'lastName'],
         properties: {
-            id: {type: 'integer'},
             firstName: {type: 'string'},
             birthDate: {type: 'string'}
         }
@@ -50,7 +49,7 @@ const updateAuthor = {
     params: {
         type: 'object',
         properties: {
-          id: { type: 'string', format: 'uuid' }
+          id: { type: 'integer'}
         }
     }
 }

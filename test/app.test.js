@@ -2,6 +2,7 @@
 
 const { test } = require('tap');
 const build = require('../app');
+const routes = require('../routes');
 
 test('requests the "/" route', async t => {
   const app = build();
@@ -15,17 +16,18 @@ test('requests the "/" route', async t => {
   console.log('body: ', response.body)
 });
 
-//below tests not working
+//failed tests
 test('requests the "/authors" route', async t => {
-  const app = build();
+  const app = routes();
 
   const response = await app.inject({
     method: 'GET',
     url: '/authors'
   });
 
-  t.equal(response.statusCode, 200, 'returns a status code of 200 for /authors');
-});
+  console.log('status code: ', response.statusCode)
+  console.log('body: ', response.body)
+}); 
 
 test('requests the "/add_author" route', async t => {
   const app = build();

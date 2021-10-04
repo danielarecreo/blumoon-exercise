@@ -18,7 +18,7 @@
   },
   "scripts": {
     "lint": "semistandard --verbose | snazzy",
-    "test": "tap"
+    "test": "tap --reporter=list --watch"
   },
   "repository": {
     "type": "git",
