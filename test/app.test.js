@@ -2,7 +2,10 @@
 
 const { test } = require('tap');
 const build = require('../app');
-const routes = require('../routes');
+const promise = require('../promise');
+const promiseCreateAuthor = require('../promiseCreateAuthor');
+const promiseUpdate = require('../promiseUpdate');
+const promiseDelete = require('../promiseDelete');
 
 test('requests the "/" route', async t => {
   const app = build();
@@ -12,54 +15,40 @@ test('requests the "/" route', async t => {
     url: '/'
   });
 
-  console.log('status code: ', response.statusCode)
-  console.log('body: ', response.body)
+  console.log('status code: ', response.statusCode);
+  console.log('body: ', response.body);
 });
 
-//failed tests
-test('requests the "/authors" route', async t => {
-  const app = routes();
+// unit test: check calling method from fastify returns the list
+test('request GET /authors', async ({ ok, type }) => {
+  const data = await promise('http://localhost:3000/authors');
 
-  const response = await app.inject({
-    method: 'GET',
-    url: '/authors'
-  });
-
-  console.log('status code: ', response.statusCode)
-  console.log('body: ', response.body)
-}); 
-
-test('requests the "/add_author" route', async t => {
-  const app = build();
-
-  const response = await app.inject({
-    method: 'POST',
-    url: '/add_author'
-  });
-
-  t.equal(response.statusCode, 200, 'returns a status code of 200 for /add_author');
+  ok(data);
+  type(new Array(), Array, Object);
 });
 
-test('requests the "/update_author" route', async t => {
-  const app = build();
+// unit test: check calling method from fastify fastify, with test parameters, inserts the author
+test('request POST /authors', async ({ ok, type }) => {
+  const data = await promiseCreateAuthor('http://localhost:3000/add-author');
 
-  const response = await app.inject({
-    method: 'PUT',
-    url: '/update_author'
-  });
-
-  t.equal(response.statusCode, 200, 'returns a status code of 200 for /update_author');
+  ok(data);
+  type(new Object(), Object);
 });
 
-test('requests the "/remove_author" route', async t => {
-  const app = build();
+// unit test: check calling method from fastify, will update an author
+test('request PUT /update-author/:id', async ({ ok, type }) => {
+  const data = await promiseUpdate('http://localhost:3000/update-author/:id');
 
-  const response = await app.inject({
-    method: 'DELETE',
-    url: '/remove_author'
-  });
+  ok(data);
+  type(new Object(), Object);
+});
 
-  t.equal(response.statusCode, 200, 'returns a status code of 200 for /remove_author');
+// unit test: check if calling method from fastify, will delete an author
+test('request DELETE /delete-author/:id', async ({ ok, type }) => {
+  const data = await promiseDelete('http://localhost:3000/delete-author/:id');
+
+  ok(data);
+  type(new Object(), Object);
 });
 
 test();

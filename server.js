@@ -2,15 +2,14 @@ const fastify = require('fastify')({
   logger: true
 });
 
-const dbconnector = require('./db/db')
+const dbconnector = require('./db/db');
 const routes = require('./routes');
 
-fastify.register(dbconnector)
+fastify.register(dbconnector);
 fastify.register(routes);
 
-fastify.addHook('onClose', (instance, done) => {
-  // code
-
+fastify.addHook('onClose', (_instance, done) => {
+  dbconnector.close();
   done();
 });
 
@@ -22,7 +21,5 @@ const start = async () => {
     process.exit(1);
   }
 };
-
-// fastify.close()
 
 start();
